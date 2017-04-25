@@ -2,7 +2,7 @@
 var React = require("react");
 
 
-// This is the Saved component. It will be used to show a log of  recent searches.
+// This is the Saved component. It will be used to show a log of saved articles.
 var Saved = React.createClass({
   // Here we describe this component's render method
   render: function() {
@@ -24,19 +24,7 @@ var Saved = React.createClass({
                     </div>
                   })
                 }
-              </ul>
-
-
-
-
-           {/* Here we use a map function to loop through an array in JSX */}
-         
-       {/*   // {this.props.saved.map(function(search, i) {
-          //   return (
-          //     <p key={i}>{search.title}</p>
-          //   );
-          // })} 
-        */}  
+              </ul> 
           
         </div>
       </div>
@@ -49,38 +37,3 @@ module.exports = Saved;
 
 
 
-// var Chat = React.createClass({
-
-//   // Here we render the component
-//   render: function() {
-
-//     return (
-
-//       <div className="container">
-
-//         <div className="row">
-
-//           <div className="col-lg-12">
-
-//             <div className="panel panel-default">
-//               <div className="panel-heading">
-//                 <h3 className="panel-title">Saved Article</h3>
-//               </div>
-//               <div className="panel-body">
-//                 <p><strong>mjlover:</strong> OMG I LOVE THIS PART!!! </p>
-//                 <p><strong>bugsboy:</strong> Best movie of all time.</p>
-//                 <p><strong>bigtroll:</strong> Porky needs to go on a diet.</p>
-//               </div>
-//             </div>
-
-//           </div>
-
-//         </div>
-
-//       </div>
-//     );
-//   }
-// });
-
-// // Export the component back for use in other files
-// module.exports = Chat;

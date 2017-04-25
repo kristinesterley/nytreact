@@ -43,8 +43,7 @@ var Search = React.createClass({
 
 
     var newQuery = "&q="+this.state.term+"&begin_date="+this.state.begin+"&end_date="+this.state.end;
-    console.log("&&&&&&&&&&&&&&");
-    console.log(newQuery);
+
     event.preventDefault();
     this.setState ({
       queryPartial: newQuery
@@ -72,28 +71,34 @@ var Search = React.createClass({
                 id="term"
                 required
               />
-           <h4 className="">
-                <strong>Start Date (YYYYMMDD)</strong>
-              </h4>
-              <input
-                value={this.state.begin}
-                onChange={this.handleBeginChange}
-                type="number"
-                className="form-control text-center"
-                id="begin"
-                required
-              />
-              <h4 className="">
-                <strong>End Date (YYYYMMDD)</strong>
-              </h4>
-              <input
-                value={this.state.end}
-                onChange={this.handleEndChange}
-                type="number"
-                className="form-control text-center"
-                id="end"
-                required
-              />  
+            <div className="row">
+              <div className="col-md-6">
+                 <h4 className="">
+                      <strong>Start Date (YYYYMMDD)</strong>
+                    </h4>
+                    <input
+                      value={this.state.begin}
+                      onChange={this.handleBeginChange}
+                      type="number"
+                      className="form-control text-center"
+                      id="begin"
+                      required
+                    />
+               </div> 
+               <div className="col-md-6">     
+                <h4 className="">
+                  <strong>End Date (YYYYMMDD)</strong>
+                </h4>
+                <input
+                  value={this.state.end}
+                  onChange={this.handleEndChange}
+                  type="number"
+                  className="form-control text-center"
+                  id="end"
+                  required
+                />  
+                </div> 
+              </div>  
 
               <br />
               <button

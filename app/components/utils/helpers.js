@@ -18,15 +18,13 @@ var helpers = {
     // create queryURL
     var queryURL = beginQueryURL+endQueryURL
     return axios.get(queryURL).then(function(response) {
-      console.log("axios get(queryURL) response");
-      console.log(response.data.response.docs);
-      // If get get a result, return that result's formatted address property
+      // console.log("axios get(queryURL) response");
+      // console.log(response.data.response.docs);
+
       if (response.data.response.docs) {
-        console.log("*&*&*&**&*&**&");
-        console.log(response.data.response.docs);
+
         return response.data.response.docs;
-        // console.log("response")
-        // console.log(response.formatted)
+
       }
       // If we don't get any results, return an empty string
       console.log("error")
@@ -44,8 +42,8 @@ var helpers = {
 
   // This function posts new searches to our database.
   postSavedArticle: function(article) {
-    console.log("article passed in to helpers.postSavedArticle");
-    console.log(article);
+    // console.log("article passed in to helpers.postSavedArticle");
+    // console.log(article);
     return axios.post("/api", article);
   }
 

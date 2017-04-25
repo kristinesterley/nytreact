@@ -144,6 +144,7 @@ var Main = React.createClass({
             <p className="text-center">
               <em>Search for articles below!</em>
             </p>
+            
           </div>
         </div>
           

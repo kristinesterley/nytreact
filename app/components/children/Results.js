@@ -5,8 +5,8 @@ var React = require("react");
 var Results = React.createClass({
 
   saveClick: function(index) {
-    const {results} = this.props;
-    const selected = results[index];
+    var {results} = this.props;
+    var selected = results[index];
 
     var article = {
       title: selected.headline.main,
@@ -14,8 +14,8 @@ var Results = React.createClass({
       date: selected.pub_date
 
     }
-    console.log("%%%%%%%%%%%%%%");
-    console.log(article);
+    // console.log("%%%%%%%%%%%%%%");
+    // console.log(article);
 
     this.props.postSavedArticle(article);
 
@@ -34,7 +34,7 @@ var Results = React.createClass({
                 {this.props.results.map( function(results, index){
                   // console.log("_id", results._id, index)
                   return <div className="resultList" key={results._id} >
-                      <li className="list-group-item snippet" >
+                      <li className="list-group-item" >
                         <p className="info" style={{fontSize: 25}}>{results.headline.main} ({new Date(results.pub_date).getFullYear()})</p>
                         <p>{results.snippet}</p>
                         <a style={{dislay:'inline-block'}} target='_blank' href={results.web_url}>{results.web_url}</a>
