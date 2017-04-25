@@ -35,7 +35,7 @@ var Results = React.createClass({
                   // console.log("_id", results._id, index)
                   return <div className="resultList" key={results._id} >
                       <li className="list-group-item" >
-                        <p className="info" style={{fontSize: 25}}>{results.headline.main} ({new Date(results.pub_date).getFullYear()})</p>
+                        <p className="info" style={{fontSize: 25}}>{results.headline.main} ({new Date(results.pub_date).toDateString()})</p>
                         <p>{results.snippet}</p>
                         <a style={{dislay:'inline-block'}} target='_blank' href={results.web_url}>{results.web_url}</a>
                         <br/>

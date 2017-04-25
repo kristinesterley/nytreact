@@ -81,6 +81,22 @@ app.post("/api", function(req, res) {
   });
 });
 
+
+  // delete an article from database
+  app.post('/api/delete', function(req, res){
+    console.log(req.body);
+    Article.findOneAndRemove({'title': req.body.title}, function(err){
+      if(err){
+        console.log("DELETE ERROR", err)
+      } else{
+        // res.redirect('/Saved');
+        //refresh the saved component
+      }
+    });
+
+  });
+
+
 // -------------------------------------------------
 
 // Listener

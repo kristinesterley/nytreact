@@ -85,7 +85,7 @@ var Main = React.createClass({
   //       console.log(data);
 
   //       // this.setState({ results: data }); this causes runQuery to execute again.
-  //       //not sure that the helpers.runQuery belongs here.....
+  //       
 
   //       // After we've received the result... then post the search term to our history.
   //       helpers.postHistory(this.state.searchTerm).then(function() {
@@ -133,6 +133,10 @@ var Main = React.createClass({
   getSavedArticles(){
     helpers.getSavedArticles();
   },
+
+  deleteArticle(article){
+    helpers.deleteArticle(article);
+  },
   // Here we render the function
   render: function() {
     return (
@@ -144,7 +148,7 @@ var Main = React.createClass({
             <p className="text-center">
               <em>Search for articles below!</em>
             </p>
-            
+
           </div>
         </div>
           
@@ -162,7 +166,7 @@ var Main = React.createClass({
 
         <div className="row">
           <div className="col-md-12">
-            <Saved saved={this.state.saved} />
+            <Saved saved={this.state.saved} deleteArticle={this.deleteArticle} />
           </div>  
         </div>
       

@@ -45,6 +45,13 @@ var helpers = {
     // console.log("article passed in to helpers.postSavedArticle");
     // console.log(article);
     return axios.post("/api", article);
+  },
+
+    // This function posts new searches to our database.
+  deleteArticle: function(article) {
+    // console.log("article passed in to helpers.postSavedArticle");
+    // console.log(article);
+    return axios.post("/api/delete", article);
   }
 
 };

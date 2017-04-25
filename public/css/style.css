@@ -1,3 +1,9 @@
-.panel, .btn, .form-control, .list-group-item {
+
+body{
+	background: url('../images/newsprint-background.jpeg') ;
+	
+}
+
+.panel, .btn, .form-control, .list-group-item, .resultList {
 	border-radius: 0px;
 }
