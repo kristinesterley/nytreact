@@ -10,7 +10,6 @@ var Route = router.Route;
 // Include the Router component to contain all our Routes
 // Here where we can pass in some configuration as props
 var Router = router.Router;
-
 // Include the hashHistory prop to handle routing client side without a server
 // https://github.com/ReactTraining/react-router/blob/master/docs/guides/Histories.md#hashhistory
 var hashHistory = router.hashHistory;
@@ -20,8 +19,9 @@ var IndexRoute = router.IndexRoute;
 
 // Reference the high-level components
 var Main = require("../components/Main");
-var Search = require("../components/Search");
-var Saved = require("../components/Saved");
+var Search = require("../components/children/Search");
+var Saved = require("../components/children/Saved");
+var Results = require("../components/children/Results");
 
 
 // Export the Routes
@@ -29,16 +29,19 @@ module.exports = (
 
   // The high level component is the Router component
   <Router history={hashHistory}>
-    <Route path="/" component={Main}>
+    <Route component={Main}>
+      <Route path="/" component={Main} />
 
-      {/* If user selects Info or Chat show the appropriate component */}
-      <Route path="search" component={Search} />
-      <Route path="saved" component={Saved} />
+      {/* Three children */}
+      <Route path="Search" component={Search} />
+      <Route path="Results" component={Results} />
+      <Route path="Saved" component={Saved} />
+
 
       {/* If user selects any other path... we get the Info Route */}
       <IndexRoute component={Search} />
 
     </Route>
-  </Router>
+   </Router>
 
 );
