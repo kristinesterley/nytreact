@@ -15,26 +15,32 @@ var Search = React.createClass({
     };
   },
 
-  // This function will respond to the user input
-  handleTermChange: function(event) {
-
-    this.setState({ term: event.target.value });
-    console.log("term in handleTermChange");
-    console.log(this.state.term);
+  handleChange: function(event){
+    var newState = {};
+    newState[event.target.id] = event.target.value;
+    this.setState(newState);
   },
 
-  // This function will respond to the user input
-  handleBeginChange: function(event) {
+  // // This function will respond to the user input
+  // handleTermChange: function(event) {
 
-    this.setState({ begin: event.target.value });
-    console.log("begin in handleBeginChange");
-    console.log(this.state.begin);
-  },
-    // This function will respond to the user input
-  handleEndChange: function(event) {
+  //   this.setState({ term: event.target.value });
+  //   console.log("term in handleTermChange");
+  //   console.log(this.state.term);
+  // },
 
-    this.setState({ end: event.target.value });
-  },
+  // // This function will respond to the user input
+  // handleBeginChange: function(event) {
+
+  //   this.setState({ begin: event.target.value });
+  //   console.log("begin in handleBeginChange");
+  //   console.log(this.state.begin);
+  // },
+  //   // This function will respond to the user input
+  // handleEndChange: function(event) {
+
+  //   this.setState({ end: event.target.value });
+  // },
 
   // When a user submits...
   handleSubmit: function(event) {
@@ -66,7 +72,7 @@ var Search = React.createClass({
               </h4>
               <input
                 type="text"
-                onChange={this.handleTermChange}
+                onChange={this.handleChange}
                 className="form-control text-left"
                 id="term"
                 required
@@ -78,7 +84,7 @@ var Search = React.createClass({
                     </h4>
                     <input
                       value={this.state.begin}
-                      onChange={this.handleBeginChange}
+                      onChange={this.handleChange}
                       type="number"
                       className="form-control text-center"
                       id="begin"
@@ -91,7 +97,7 @@ var Search = React.createClass({
                 </h4>
                 <input
                   value={this.state.end}
-                  onChange={this.handleEndChange}
+                  onChange={this.handleChange}
                   type="number"
                   className="form-control text-center"
                   id="end"
