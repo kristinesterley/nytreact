@@ -43,7 +43,7 @@ app.get("/", function(req, res) {
   res.sendFile(__dirname + "/public/index.html");
 });
 
-// This is the route we will send GET requests to retrieve our most recent search data.
+// This is the route we will send GET requests to retrieve our saved articles.
 // We will call this route the moment our page gets rendered
 app.get("/api", function(req, res) {
 
@@ -76,7 +76,10 @@ app.post("/api", function(req, res) {
       console.log(err);
     }
     else {
-      res.send("Saved Article");
+
+      res.redirect("/api");
+
+      
     }
   });
 });
@@ -89,8 +92,8 @@ app.post("/api", function(req, res) {
       if(err){
         console.log("DELETE ERROR", err)
       } else{
-        // res.redirect('/Saved');
-        //refresh the saved component
+        res.redirect("/api");
+
       }
     });
 

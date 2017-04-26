@@ -21,36 +21,14 @@ var Search = React.createClass({
     this.setState(newState);
   },
 
-  // // This function will respond to the user input
-  // handleTermChange: function(event) {
-
-  //   this.setState({ term: event.target.value });
-  //   console.log("term in handleTermChange");
-  //   console.log(this.state.term);
-  // },
-
-  // // This function will respond to the user input
-  // handleBeginChange: function(event) {
-
-  //   this.setState({ begin: event.target.value });
-  //   console.log("begin in handleBeginChange");
-  //   console.log(this.state.begin);
-  // },
-  //   // This function will respond to the user input
-  // handleEndChange: function(event) {
-
-  //   this.setState({ end: event.target.value });
-  // },
-
   // When a user submits...
   handleSubmit: function(event) {
     // prevent the HTML from trying to submit a form if the user hits "Enter" instead of
     // clicking the button
-
-
+    event.preventDefault();
     var newQuery = "&q="+this.state.term+"&begin_date="+this.state.begin+"&end_date="+this.state.end;
 
-    event.preventDefault();
+   
     this.setState ({
       queryPartial: newQuery
     });

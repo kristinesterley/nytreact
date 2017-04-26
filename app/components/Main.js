@@ -12,34 +12,6 @@ var helpers = require("./utils/helpers");
 var Main = React.createClass({
 
 
-
-
-  // getInitialState: function() {
-  //   return { searchTerm: "", results: "" };
-  // },
-
-  // // componentDidUpdate is a lifecycle method that will get run every time the component updates it's
-  // // props or state
-  // componentDidUpdate: function(prevProps, prevState) {
-  //   // If we have a new search term, run a new search
-  //   if (prevState.searchTerm !== this.state.searchTerm) {
-  //     console.log("UPDATED");
-
-  //     helpers.runQuery(this.state.searchTerm).then(function(data) {
-  //       if (data !== this.state.results) {
-  //         console.log(data);
-  //         this.setState({ results: data });
-  //       }
-  //       // This code is necessary to bind the keyword "this" when we say this.setState
-  //       // to actually mean the component itself and not the runQuery function.
-  //     }.bind(this));
-  //   }
-  // },
-  // setTerm: function(term) {
-  //   this.setState({ searchTerm: term });
-  // },
-
-
   // Here we set a generic state associated with the number of clicks
   // Note how we added in this history state variable
   getInitialState: function() {
@@ -60,47 +32,6 @@ var Main = React.createClass({
       }
     }.bind(this));
   },
-
-  // The moment the page renders get the History
-  // componentDidMount: function() {
-
-  //   //not right here
-  //   // Get the latest history.
-  //   // helpers.getHistory().then(function(response) {
-  //   //   console.log(response);
-  //   //   if (response !== this.state.history) {
-  //   //     console.log("History", response.data);
-  //   //     this.setState({ history: response.data });
-  //   //   }
-  //   // }.bind(this));
-  // },
-
-  // // If the component changes (i.e. if a search is entered)...
-  // componentDidUpdate: function(prevProps, prevState) {
-  //   if (prevState.searchQuery !== this.state.searchQuery){
-  //   // Run the query for the address
-  //       helpers.runQuery(this.state.searchQuery).then(function(data) {
-  //     //if (data !== this.state.results) {
-  //       console.log("back in main");
-  //       console.log(data);
-
-  //       // this.setState({ results: data }); this causes runQuery to execute again.
-  //       
-
-  //       // After we've received the result... then post the search term to our history.
-  //       helpers.postHistory(this.state.searchTerm).then(function() {
-  //         console.log("Updated!");
-  //         // After we've done the post... then get the updated history
-  //         helpers.getHistory().then(function(response) {
-  //           console.log("Current History", response.data);
-  //           console.log("History", response.data);
-  //           this.setState({ history: response.data });
-  //         }.bind(this));
-  //       }.bind(this));
-        
-  //     //}
-  //   }.bind(this));
-  // },
 
     componentDidUpdate: function(prevProps, prevState) {
     // If we have a new search term, run a new search
@@ -125,17 +56,26 @@ var Main = React.createClass({
     });
   },
 
-  postSavedArticle(article){
-    //console.log('this is the saved Article', article)
-    helpers.postSavedArticle(article);
-  },
-
   getSavedArticles(){
     helpers.getSavedArticles();
   },
 
+  //in postSavedArticle and in deleteArticle, I added a callback .then function to change the state with data from a new get on the database that
+  // is done in the route. In the route, once the specified article is saved or deleted, I do a redirect to the get route and send back the new
+  // array of saved articles in response.data.  Once the state changes, react updates the dom!
+
+  postSavedArticle(article){
+    //console.log('this is the saved Article', article)
+    helpers.postSavedArticle(article).then(function(response){
+      this.setState({saved: response.data});
+    }.bind(this));
+  },
+
+
   deleteArticle(article){
-    helpers.deleteArticle(article);
+    helpers.deleteArticle(article).then(function(response){
+      this.setState({saved: response.data});
+    }.bind(this));
   },
   // Here we render the function
   render: function() {
@@ -179,46 +119,4 @@ var Main = React.createClass({
 module.exports = Main;
 
 
-// var Main = React.createClass({
 
-//   // Here we render the component
-//   render: function() {
-
-//     return (
-//       <div className="container">
-
-//         <div className="row">
-
-//           <div className="jumbotron">
-//             <h1>React Router</h1>
-//             <p><em>Because we can't afford to miss a minute of this video! #flylikeaneagle</em></p>
-//             <a href="#/info"><button className="btn btn-default">Info</button></a>
-//             <a href="#/chat"><button className="btn btn-default">Comments</button></a>
-//           </div>
-
-//           <div className="row">
-//             <div className="text-center">
-//               <iframe
-//                 width="640"
-//                 height="360"
-//                 src="https://www.youtube.com/embed/K1lKk5IU4ZE?rel=0&amp;controls=0&amp;showinfo=0"
-//               >
-//               </iframe>
-//             </div>
-//           </div>
-
-//           <div className="container">
-
-//             {/* Added this.props.children to dump all of the child components into place */}
-//             {this.props.children}
-
-//           </div>
-//         </div>
-
-//       </div>
-//     );
-//   }
-// });
-
-// // Export the component back for use in other files
-// module.exports = Main;
