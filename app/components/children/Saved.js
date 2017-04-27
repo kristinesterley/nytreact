@@ -1,12 +1,31 @@
 // Include React
 var React = require("react");
+var helpers = require("../utils/helpers");
 
 
 // This is the Saved component. It will be used to show a log of saved articles.
 var Saved = React.createClass({
 
+    getInitialState: function() {
+    return { 
+      saved: []
+    };
+  },
+
+  componentDidMount: function() {
+    // Get the latest history.
+    helpers.getSavedArticles().then(function(response) {
+      console.log(response);
+      if (response !== this.state.saved) {
+        console.log("saved", response.data);
+        this.setState({ saved: response.data });
+      }
+    }.bind(this));
+  },
+
+
   deleteClick: function(index) {
-    var {saved} = this.props;
+    var {saved} = this.state;
     // console.log("Here");
     // console.log(this.props);
     var selected = saved[index];
@@ -15,10 +34,23 @@ var Saved = React.createClass({
       title: selected.title
     }
 
-
-    this.props.deleteArticle(article);
+    this.deleteArticle(article);
 
   },
+
+  // getSavedArticles(){
+  //   helpers.getSavedArticles();
+  // },
+
+  deleteArticle(article){
+    helpers.deleteArticle(article).then(function(response){
+      this.setState({saved: response.data});
+    }.bind(this));
+  },
+
+
+
+
 
   // Here we describe this component's render method
   render: function() {
@@ -30,7 +62,7 @@ var Saved = React.createClass({
         <div className="panel-body text-left">
 
               <ul className="list-group">
-                {this.props.saved.map( function(search, i){
+                {this.state.saved.map( function(search, i){
                   return <div className="resultList" key={i} >
                       <li className="list-group-item" >
                         <p className="info" style={{fontSize: 25}}>{search.title} ({new Date(search.date).toDateString()})</p>

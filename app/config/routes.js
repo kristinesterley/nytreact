@@ -29,8 +29,8 @@ module.exports = (
 
   // The high level component is the Router component
   <Router history={hashHistory}>
-    <Route component={Main}>
-      <Route path="/" component={Main} />
+    
+      <Route path="/" component={Main}>
 
       {/* Three children */}
       <Route path="Search" component={Search} />

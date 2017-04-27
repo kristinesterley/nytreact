@@ -1,19 +1,50 @@
 
 // Include React
 var React = require("react");
+var Results = require("./Results");
+
+var helpers = require("../utils/helpers");
 
 // Creating the Search component
 var Search = React.createClass({
 
+
+
   // Here we set a generic state associated with the text being searched for
   getInitialState: function() {
     return { 
-      queryPartial: "",
+      searchQuery: "",
       term: "",
       begin: 20170101,
-      end: 20171231
+      end: 20171231,
+      results: []
     };
   },
+
+
+
+  componentDidUpdate: function(prevProps, prevState) {
+    // If we have a new search term, run a new search
+    if (prevState.searchQuery !== this.state.searchQuery) {
+      console.log("UPDATED");
+
+      helpers.runQuery(this.state.searchQuery).then(function(data) {
+        if (data !== this.state.results) {
+          console.log(data);
+          this.setState({ results: data });
+        }
+        // This code is necessary to bind the keyword "this" when we say this.setState
+        // to actually mean the component itself and not the runQuery function.
+      }.bind(this));
+    }
+  },
+
+  postSavedArticle(article){
+    //console.log('this is the saved Article', article)
+    helpers.postSavedArticle(article);
+    
+  },
+
 
   handleChange: function(event){
     var newState = {};
@@ -27,17 +58,16 @@ var Search = React.createClass({
     // clicking the button
     event.preventDefault();
     var newQuery = "&q="+this.state.term+"&begin_date="+this.state.begin+"&end_date="+this.state.end;
-
    
     this.setState ({
-      queryPartial: newQuery
+      searchQuery: newQuery
     });
-
-    this.props.setParent(newQuery);
   },
+
   // Here we describe this component's render method
   render: function() {
     return (
+      <div>
       <div className="panel panel-primary">
         <div className="panel-heading">
           <h3 className="panel-title text-center">Search</h3>
@@ -93,6 +123,13 @@ var Search = React.createClass({
               </button>
             </div>
           </form>
+        </div>
+      </div>
+
+        <div className="row">  
+          <div className="col-md-12">
+            <Results results={this.state.results} postSavedArticle={this.postSavedArticle} />
+          </div>
         </div>
       </div>
     );
